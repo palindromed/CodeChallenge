@@ -1,14 +1,10 @@
 #The library should be aware of a number of distinct shelves.
-#Each shelf should know what books it contains.
 #Create methods to add and remove a book from a self.
 #The library should have a method to report all books it contains.
 
 class Library(object):
     """create Library object"""
     biblioteca = {}
-
-    #def __init__(self):
-     #   self.total_books = {}
 
     def book_count(total_books):
         """Number of shelves in Library"""
@@ -34,12 +30,17 @@ class Shelf(Library):
         Library.biblioteca[self.name].append(newtitle)
 
     def contents(self):
-        one_shelf = Library.biblioteca[self.name]
-        return ', '.join(one_shelf)
+        shelf_contents = Library.biblioteca[self.name]
+        return ', '.join(shelf_contents)
 
-#method for title of every book each shelf contains
+    def delete(self, title):
 
-#method to remove a particular book from shelf
+        shelf_contents = Library.biblioteca[self.name]
+        try:
+            shelf_contents.remove(title)
+        except ValueError:
+            return 'That book is not on this shelf.'
+
 
 
 class Book(object):
@@ -53,5 +54,8 @@ if __name__ == '__main__':
     Shelf('Crap', '50 Shades of Grey')
     Shelf('Mystery')
     S.addBook('The Stormlight Archive')
+    S.delete('The Name Of the Wind')
+    print(S.delete('The Way of Kings'))
     print(S.contents())
+
     print(Library.biblioteca)
