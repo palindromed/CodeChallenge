@@ -3,25 +3,28 @@
   <head>
       <meta charset="UTF-8">
       <title>To Do List</title>
-      <link rel="stylesheet" type="text/css" href="style.css">
+
   </head>
   <body>
     <main>
 
       <ul id="lists">To Do List
-          <li>Finish Code Challenge</li>
-          <li>Quit Panicking</li>
+      <div class="divide"></div>
+        <li class="first">Finish Code Challenge</li>
+        <li>Code All The Things</li>
       </ul>
-    <section>
-    <form id="form">
+
+      <section id="seperation">
+
+      <form id="form">
         <label type="text" id="add-task" for="task">Add Task</label>
         <input id="task" placeholder="To Do">
         <button type="submit" >Submit Task</button>
-    </form>
-    </section>
+      </form>
+
+      </section>
 
     </main>
-
+    <script type="text/javascript" src="deps/jquery.js"></script>
     <script type="text/javascript" src="todo.js"></script>
-
     </body>
