@@ -34,8 +34,8 @@ class Shelf(Library):
         Library.biblioteca[self.name].append(newtitle)
 
     def contents(self):
-        return Library.biblioteca[self.name].values()
-
+        one_shelf = Library.biblioteca[self.name]
+        return ', '.join(one_shelf)
 
 #method for title of every book each shelf contains
 
@@ -53,4 +53,5 @@ if __name__ == '__main__':
     Shelf('Crap', '50 Shades of Grey')
     Shelf('Mystery')
     S.addBook('The Stormlight Archive')
+    print(S.contents())
     print(Library.biblioteca)
