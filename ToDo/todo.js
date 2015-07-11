@@ -6,11 +6,14 @@ $(function(){
         $('.remove').remove();
     });
 
-    $('form').on('submit', function(event) {
+       $('form').on('submit', function(event) {
 
         var newTask = $('input').val();
-
-        $('<li>'+ newTask + '</li>').prependTo('li');
+        $("#form").get(0).reset()
+        if (newTask != '') {
+            var first = document.getElementsByTagName('li')[0]
+            $('<li>'+ newTask + '</li>').insertBefore(first);
+        };
 
         event.preventDefault();
     });
