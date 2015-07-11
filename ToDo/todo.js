@@ -1,12 +1,11 @@
-$(function(){
-
+$(function() {
 
     $('ul').on('click', 'li', function(){
-        $(this).addClass('remove');
-        $('.remove').remove();
+        $(this).addClass('complete');
+        $('.complete').remove();
     });
 
-       $('form').on('submit', function(event) {
+    $('form').on('submit', function(event) {
 
         var newTask = $('input').val();
         $("#form").get(0).reset()
@@ -17,7 +16,6 @@ $(function(){
 
         event.preventDefault();
     });
-
 
 });
 
