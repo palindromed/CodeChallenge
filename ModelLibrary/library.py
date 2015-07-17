@@ -44,8 +44,6 @@ class Book(Library):
         self.title = title
         self.shelf = shelf
 
-        #Shelf(self.shelf, self.title)
-
 
 if __name__ == '__main__':
     S = Shelf('Fantasy', 'The Name Of the Wind')
