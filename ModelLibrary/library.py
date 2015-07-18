@@ -1,38 +1,77 @@
-#The library should be aware of a number of distinct shelves.
-#Each shelf should know what books it contains.
-#Create methods to add and remove a book from a self.
-#The library should have a method to report all books it contains.
 
-class Library(object):
+class Library:
     """create Library object"""
-    d = {shelf: [books]}
-    def __init__(self):
-        self.total_books = {}
+    biblioteca = {}
 
-    def book_count(total_books):
-#create a dict to keep all shelves and which books they're on.
-#1 method for len of the dict(number of shelves)
-#method for title of every book it contains
-        #{key:value for values}a dict comp for 1 of the methods?
+    def bookCount(self):
+        """Number of shelves in Library"""
+        return len(self.biblioteca)
+
+    def bookTitles(self):
+        """Titles of all books present in Library"""
+        all_titles = self.biblioteca.values()
+        unpacked = [j for i in all_titles for j in i]
+        return ', '.join(unpacked)
 
 
-
-
-class Shelf(object):
+class Shelf(Library):
     """create  a shelf in library for books"""
+
     def __init__(self, name):
         self.name = name
-        self.books = #dict values that go along with shelf
-#method for title of every book each shelf contains
-#add method to add a book to an existing shelf
-#method to remove a particular book from shelf
+        Library.biblioteca[self.name] = []
+
+    def contents(self):
+        """return all titles on a specified shelf """
+        shelf_contents = Library.biblioteca[self.name]
+        return ', '.join(shelf_contents)
+
+    def addBook(self, newtitle):
+        """Add a book to a specific shelf, and create book object"""
+        Book(newtitle)
+        Library.biblioteca[self.name].append(newtitle)
+
+    def delete(self, title):
+        """If a specified book exists, delete it"""
+        shelf_items = Library.biblioteca[self.name]
+        try:
+            shelf_items.remove(title)
+        except ValueError:
+            return 'That book is not on this shelf.'
 
 
-
-
-class Book(object):
+class Book(Library):
     """add a book, associate with shelf in library"""
     def __init__(self, title):
         self.title = title
-        self.shelf =
 
+
+if __name__ == '__main__':
+    broadview = Library()
+
+    F = Shelf('Fantasy')
+    F.addBook('The Dresden Files')
+    F.addBook('The Name Of the Wind')
+
+    G = Shelf('Garbage')
+    G.addBook('50 Shades of Grey')
+
+    M = Shelf('Mystery')
+    M.addBook('Sherlock Holmes')
+
+    amt = broadview.bookCount()
+    print("This library currently has {} shelves.\n".format(amt))
+
+    total = broadview.bookTitles()
+    print("The titles currently in the library: {}\n".format(total))
+
+    fan = F.contents()
+    print("The Fantasy shelf currently holds: {}\n".format(fan))
+
+    F.addBook('The Stormlight Archive')
+    fan = F.contents()
+    print("After adding a book, 'Fantasy' now has: {}\n".format(fan))
+
+    F.delete('The Name Of the Wind')
+    fan = F.contents()
+    print("After deleting a book, 'Fantasy' now has: {}\n".format(fan))
