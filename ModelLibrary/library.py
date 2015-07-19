@@ -14,7 +14,7 @@ class Library:
         return ', '.join(unpacked)
 
 
-class Shelf(Library):
+class Shelf():
     """create  a shelf in library for books"""
 
     def __init__(self, name):
@@ -40,7 +40,7 @@ class Shelf(Library):
             return 'That book is not on this shelf.'
 
 
-class Book(Library):
+class Book():
     """add a book, associate with shelf in library"""
     def __init__(self, title):
         self.title = title
