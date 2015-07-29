@@ -1,6 +1,13 @@
 class Patron(object):
     def __init__(self):
-        self.books = []
+        self.items = []
+
+    def __str__(self):
+        contents = ''
+        for items in self.items:
+            contents += str(items) + "\n"
+        return "Currently checked out items: \n" + contents
+
 
 class Library(object):
 
@@ -14,22 +21,36 @@ class Library(object):
         return contents
 
     def add_shelf(self, shelf):
-        """add shelf to library"""
+        """add shelf object to library"""
         self.shelves.append(shelf)
 
     def shelf_book(self, shelf, book):
-        """return a book that had been checked out or add new book"""
+        """add a book to an existing shelf"""
         shelf.books.append(book)
 
     def shelf_count(self):
         """Number of shelves in Library"""
         return len(self.shelves)
 
-    def check_out_book(self, shelf, book, patron):
-        """take book from library and give to patron"""
-        shelf.books.pop(book)
-        patron.books.append(book)
+    def check_out_book(self, patron, book):
+        """move book object to patron, change status of book to checked out.
+            """
+        try:
+            if book.available:
+                patron.items.append(book)
+                book.available = False
+            else:
+                print("That book is currently checked out")
+        except:
+            print("That book is not in our library.")
 
+    def remove_book(self, shelf, book):
+        """remove book from library"""
+        shelf.books.remove(book)
+
+    def return_book(self, patron, book):
+        patron.items.remove(book)
+        book.available = True
 
 
 class Shelf(object):
@@ -43,14 +64,16 @@ class Shelf(object):
         contents = ''
         for book in self.books:
             contents += str(book) + "\n"
-        return "The shelf " + self.name + " contains: " + contents
+        return "The " + self.name + " shelf contains: \n" + contents
 
 
 class Book(object):
-    """add a book, associate with shelf in library"""
+    """Create a book object"""
     def __init__(self, title, author):
+        """attributes: title author and availability to be checked out"""
         self.title = title
         self.author = author
+        self.available = True
 
     def __str__(self):
         return self.title + ' by ' + self.author
@@ -58,8 +81,18 @@ class Book(object):
 
 if __name__ == '__main__':
     broadview = Library()
-    f = Shelf('fantasy')
-    n = Book('Wind', 'Rothfuss')
+    f = Shelf('Fantasy')
+    n = Book('The Name of The Wind', 'Patrick Rothfuss')
     broadview.add_shelf(f)
     broadview.shelf_book(f, n)
+    d = Book('Dresden Files', 'Jim Butcher')
+    broadview.shelf_book(f, d)
+    m = Shelf('Mystery')
+    broadview.add_shelf(m)
+    s = Book('Sherlock Holmes', 'Arthur Conan Doyle')
+    broadview.shelf_book(m, s)
+    you = Patron()
+    broadview.check_out_book(you, d)
+
     me = Patron()
+    broadview.check_out_book(me, n)
